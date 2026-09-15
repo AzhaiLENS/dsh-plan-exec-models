@@ -366,7 +366,7 @@ node test/session-isolation.mjs
 node --check lib/index.js && node --check lib/client.js
 ```
 
-要验**正在跑的真实实例**（复用 §9 的 cookie，**全程不发消息、结束自动还原 Host 配置**）：
+要验**正在跑的真实实例**（凭据从环境变量读取，**全程不发消息、结束自动还原 Host 配置**）：
 
 ```bash
 # ⑤ 界面端到端：44 项断言（两个框、让位、三面板菜单、2 秒轮询回归、配置还原）
@@ -383,7 +383,14 @@ node test/live-ui-shots.mjs
 node test/live-menu-scroll.mjs
 ```
 
-> live 四支都硬编码了本机 App 的 `dsh-auth-*` cookie；**cookie 过期就照 §9.1 重新取一个**。
+> live 四支的凭据**已脱敏**：脚本里不含任何 cookie / token，运行时从环境变量读取
+> （`DSH_AUTH_NAME` / `DSH_AUTH_VALUE` = 本机 DSH App 的 `dsh-auth-*` 会话 cookie，从浏览器开发者工具复制；
+> cookie 过期就重新取一个）。仓库内不含任何凭据。运行示例：
+>
+> ```bash
+> DSH_AUTH_NAME='dsh-auth-xxxx' DSH_AUTH_VALUE='v1.xxxx' node test/live-ui-verify.mjs
+> ```
+>
 > 它们只点 UI、读 DOM，**不发任何消息**，所以不会污染用户的会话、也不会烧 token。
 >
 > `live-session-isolation.mjs` 会**切换侧栏里的对话**（点未选中那一行，靠坐标点而非索引 ——
