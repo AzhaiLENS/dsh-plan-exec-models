@@ -1,0 +1,24 @@
+{
+  "name": "dsh-plan-exec-models",
+  "version": "4.0.0",
+  "private": true,
+  "description": "主管/员工双模型：主管（强模型）拆目标、给方法/验收、员工卡住时下场救火；员工（便宜模型）按方法落地、碰壁先自己想办法、扛不住才带结构化报告求援。总开关关掉即完全退回官方单模型生成。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-model-selection",
+        "@deepseek-ai/dsh-api-session-controller"
+      ],
+      "platform": "web"
+    }
+  }
+}
