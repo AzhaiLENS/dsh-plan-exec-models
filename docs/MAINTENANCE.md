@@ -388,7 +388,9 @@ node test/live-menu-scroll.mjs
 > cookie 过期就重新取一个）。仓库内不含任何凭据。运行示例：
 >
 > ```bash
-> DSH_AUTH_NAME='dsh-auth-xxxx' DSH_AUTH_VALUE='v1.xxxx' node test/live-ui-verify.mjs
+> export DSH_AUTH_NAME='<本机会话 cookie 的 name>'
+> export DSH_AUTH_VALUE='<该 cookie 的 value>'
+> node test/live-ui-verify.mjs
 > ```
 >
 > 它们只点 UI、读 DOM，**不发任何消息**，所以不会污染用户的会话、也不会烧 token。
